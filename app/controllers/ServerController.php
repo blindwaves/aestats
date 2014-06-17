@@ -2,10 +2,12 @@
 
 class ServerController extends BaseController {
 
-    public function getIndex()
+    public function getPlayer($name, $id)
     {
-        return View::make('server/index', array(
-            
+        $history = History::where('server', '=', $name)->where('url', '=', 'profile.aspx?player='.$id)->get();
+
+        return View::make('server/player', array(
+            'history' => $history,
         ));
     }
 

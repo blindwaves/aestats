@@ -15,8 +15,8 @@ Route::get('job', function() {
     $genericUrl = 'http://{server}.astroempires.com/ranks.aspx?view={category}&see={page}';
     $servers = array('andromeda');
     $categories = array(
-        '', 'ply_economy', 'ply_fleet', 'ply_technology', 'ply_experience',
-        //'guilds_level', 'guilds_economy', 'guilds_fleet', 'guilds_technology', 'guilds_experience'
+        //'', 'ply_economy', 'ply_fleet', 'ply_technology', 'ply_experience',
+        'guilds_level', 'guilds_economy', 'guilds_fleet', 'guilds_technology', 'guilds_experience'
     );
     //$pages = array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10');
     $pages = array('1');
@@ -42,5 +42,5 @@ Route::get('job', function() {
     }
 });
 
-Route::controller('server', 'ServerController');
+Route::controller('server/{name}', 'ServerController');
 Route::controller('/', 'HomeController');
