@@ -15,8 +15,8 @@ Route::get('job', function() {
     $genericUrl = 'http://{server}.astroempires.com/ranks.aspx?view={category}&see={page}';
     $servers = array('andromeda');
     $categories = array(
-        '', 'ply_economy', 'ply_fleet', 'ply_technology', 'ply_experience',
-        'guilds_level', 'guilds_economy', 'guilds_fleet', 'guilds_technology', 'guilds_experience'
+        'ply_level' => '', 'ply_economy' => 'ply_economy', 'ply_fleet' => 'ply_fleet', 'ply_technology' => 'ply_level', 'ply_experience' => 'ply_experience',
+        'guilds_level' => 'guilds_level', 'guilds_economy' => 'guilds_economy', 'guilds_fleet' => 'guilds_fleet', 'guilds_technology' => 'guilds_technology', 'guilds_experience' => 'guilds_experience'
     );
     $pages = array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10');
     $batch = uniqid();
@@ -24,8 +24,8 @@ Route::get('job', function() {
     foreach($servers as $server) {
         $pageUrl = str_replace('{server}', $server, $genericUrl);
 
-        foreach($categories as $category) {
-            $pageUrl = str_replace('{category}', $categories[0], $pageUrl);
+        foreach($categories as $categoryKey => $categoryValue) {
+            $pageUrl = str_replace('{category}', $categoryValue, $pageUrl);
 
             foreach($pages as $page) {
                 if (strpos($category, 'guilds_') == 0 && $page == '3') {
@@ -33,9 +33,9 @@ Route::get('job', function() {
                     break;
                 }
 
-                $pageUrl = str_replace('{page}', $pages[0], $pageUrl);
+                $pageUrl = str_replace('{page}', $page, $pageUrl);
 
-                Queue::push('AeStatsParserService', array('batch' => $batch, 'category' => $category, 'server' => $server, 'url' => $pageUrl));
+                Queue::push('AeStatsParserService', array('batch' => $batch, 'category' => $categoryKey, 'server' => $server, 'url' => $pageUrl));
             }
         }
     }
