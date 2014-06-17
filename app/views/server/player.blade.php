@@ -7,7 +7,8 @@
         google.setOnLoadCallback(drawChart);
         function drawChart() {
             var options = {
-                legend: { position: 'bottom' }
+                legend: { position: 'bottom' },
+                pointSize: 5
             };
 
             var data = [];
