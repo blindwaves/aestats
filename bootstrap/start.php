@@ -27,6 +27,7 @@ $app = new Illuminate\Foundation\Application;
 $env = $app->detectEnvironment(array(
 
 	'local' => array('Numerical', '*Mobile'),
+	'production' => array('128.199.233.47'),
 
 ));
 
