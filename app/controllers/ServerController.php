@@ -7,7 +7,6 @@ class ServerController extends BaseController {
         $profile = History::where('server', '=', $serverName)
                         ->where('url', '=', 'profile.aspx?player='.$id)
                         ->where('category', '=', 'ply_level')
-                        ->groupBy('name', 'tag')
                         ->orderBy('id', 'DESC')
                         ->get();
 
@@ -45,6 +44,17 @@ class ServerController extends BaseController {
                         ->groupBy('value')
                         ->orderBy('id', 'ASC')
                         ->get();
+
+        $profileHistory = array();
+        $profilePrevious = $profile[count($profile) - 1];
+        array_push($profileHistory, $profilePrevious);
+
+        for ($i = count($profile) - 2; $i > 0; $i--) {
+            if (strcmp($profilePrevious->tag, $profile[$i]->tag) !== 0 &&
+                strcmp($profilePrevious->name, $profile[$i]->name) !== 0) {
+                    array_push($profileHistory, $profile[$i]);
+            }
+        }
 
         return View::make('server/player', array(
             'economy' => $economy,
