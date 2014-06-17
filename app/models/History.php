@@ -13,4 +13,18 @@ class History extends Eloquent {
         return substr($this->url, $index + 1);
     }
 
+    public function getRecordJavascriptDateString()
+    {
+        $date = $this->updated_at;
+
+        return 'new Date('
+            .$date->year.', '
+            .($date->month - 1).', ' // JavaScript month is 0 indexed.
+            .$date->day.', '
+            .$date->hour.', '
+            .$date->minute.', '
+            .$date->second.
+        ')';
+    }
+
 }
