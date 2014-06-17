@@ -7,6 +7,7 @@
         google.setOnLoadCallback(drawChart);
         function drawChart() {
             var options = {
+                legend: { position: 'bottom' }
             };
 
             var data = google.visualization.arrayToDataTable([
