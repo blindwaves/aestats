@@ -11,5 +11,31 @@
 |
 */
 
+Route::get('job', function() {
+    $genericUrl = 'http://{server}.astroempires.com/ranks.aspx?view={category}&see={page}';
+    $servers = array('andromeda');
+    $categories = array(
+        '', 'ply_economy', 'ply_fleet', 'ply_technology', 'ply_experience',
+        //'guilds_level', 'guilds_economy', 'guilds_fleet', 'guilds_technology', 'guilds_experience'
+    );
+    //$pages = array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10');
+    $pages = array('1');
+    $batch = uniqid();
+
+    foreach($servers as $server) {
+        $pageUrl = str_replace('{server}', $server, $genericUrl);
+
+        foreach($categories as $category) {
+            $pageUrl = str_replace('{category}', $categories[0], $pageUrl);
+
+            foreach($pages as $page) {
+                $pageUrl = str_replace('{page}', $pages[0], $pageUrl);
+
+                Queue::push('AeStatsParserService', array('batch' => $batch, 'category' => $category, 'server' => $server, 'url' => $pageUrl));
+            }
+        }
+    }
+});
+
 Route::controller('server', 'ServerController');
 Route::controller('/', 'HomeController');
