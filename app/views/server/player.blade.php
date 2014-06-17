@@ -46,6 +46,8 @@
                 var dataView = new google.visualization.DataView(dataTable);
                 var chart = new google.visualization.LineChart(document.getElementById(item));
                 chart.draw(dataView, options);
+
+                $('#' + item).addClass('tab-pane');
             });
         }
     </script>
@@ -70,11 +72,11 @@
                 <li><a href="#technology" data-toggle="tab">technology</a></li>
             </ul>
             <div class="tab-content">
-                <div class="tab-pane active" id="fleet"></div>
-                <div class="tab-pane" id="economy"></div>
-                <div class="tab-pane" id="level"></div>
-                <div class="tab-pane" id="experience"></div>
-                <div class="tab-pane" id="technology"></div>
+                <div class="active" id="fleet"></div>
+                <div class="" id="economy"></div>
+                <div class="" id="level"></div>
+                <div class="" id="experience"></div>
+                <div class="" id="technology"></div>
             </div>
         </div>
     </div>
