@@ -7,58 +7,47 @@
         google.setOnLoadCallback(drawChart);
         function drawChart() {
             var options = {
-                legend: { position: 'bottom' }
+                legend: { position: 'bottom' },
+                pointSize: 5
             };
 
-            var data = google.visualization.arrayToDataTable([
-                ['Date', 'fleet'],
+            var data = [];
+            data['fleet'] = [
                 @foreach($fleet as $item)
-                ['{{ $item->updated_at }}', {{ $item->getNonLocalisedValue() }}],
+                [{{ $item->getRecordJavascriptDateString() }}, {{ $item->getNonLocalisedValue() }}],
                 @endforeach
-            ]);
-
-            var chart = new google.visualization.LineChart(document.getElementById('fleet'));
-            chart.draw(data, options);
-
-            data = google.visualization.arrayToDataTable([
-                ['Date', 'economy'],
+            ];
+            data['economy'] = [
                 @foreach($economy as $item)
-                ['{{ $item->updated_at }}', {{ $item->getNonLocalisedValue() }}],
+                [{{ $item->getRecordJavascriptDateString() }}, {{ $item->getNonLocalisedValue() }}],
                 @endforeach
-            ]);
-
-            chart = new google.visualization.LineChart(document.getElementById('economy'));
-            chart.draw(data, options);
-
-            data = google.visualization.arrayToDataTable([
-                ['Date', 'level'],
+            ];
+            data['level'] = [
                 @foreach($level as $item)
-                ['{{ $item->updated_at }}', {{ $item->getNonLocalisedValue() }}],
+                [{{ $item->getRecordJavascriptDateString() }}, {{ $item->getNonLocalisedValue() }}],
                 @endforeach
-            ]);
-
-            chart = new google.visualization.LineChart(document.getElementById('level'));
-            chart.draw(data, options);
-
-            data = google.visualization.arrayToDataTable([
-                ['Date', 'experience'],
+            ];
+            data['experience'] = [
                 @foreach($experience as $item)
-                ['{{ $item->updated_at }}', {{ $item->getNonLocalisedValue() }}],
+                [{{ $item->getRecordJavascriptDateString() }}, {{ $item->getNonLocalisedValue() }}],
                 @endforeach
-            ]);
-
-            chart = new google.visualization.LineChart(document.getElementById('experience'));
-            chart.draw(data, options);
-
-            data = google.visualization.arrayToDataTable([
-                ['Date', 'technology'],
+            ];
+            data['technology'] = [
                 @foreach($technology as $item)
-                ['{{ $item->updated_at }}', {{ $item->getNonLocalisedValue() }}],
+                [{{ $item->getRecordJavascriptDateString() }}, {{ $item->getNonLocalisedValue() }}],
                 @endforeach
-            ]);
+            ];
 
-            chart = new google.visualization.LineChart(document.getElementById('technology'));
-            chart.draw(data, options);
+            _(['fleet', 'economy', 'level', 'experience', 'technology']).forEach(function(item) { 
+                var dataTable = new google.visualization.DataTable();
+                dataTable.addColumn('date', 'date');
+                dataTable.addColumn('number', item);
+                dataTable.addRows(data[item]);
+
+                var dataView = new google.visualization.DataView(dataTable);
+                var chart = new google.visualization.LineChart(document.getElementById(item));
+                chart.draw(dataView, options);
+            });
         }
     </script>
 
