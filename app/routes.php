@@ -21,6 +21,13 @@ Route::get('job', function() {
     $pages = array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10');
     $batch = uniqid();
 
+    if (App::environment('local')) {
+        $categories = array(
+            'ply_level' => '', 'ply_economy' => 'ply_economy', 'ply_fleet' => 'ply_fleet', 'ply_technology' => 'ply_level', 'ply_experience' => 'ply_experience',
+        );
+        $pages = array('1');
+    }
+
     foreach($servers as $server) {
         $pageUrl = str_replace('{server}', $server, $genericUrl);
 
@@ -28,7 +35,7 @@ Route::get('job', function() {
             $pageUrl = str_replace('{category}', $categoryValue, $pageUrl);
 
             foreach($pages as $page) {
-                if (strpos($category, 'guilds_') == 0 && $page == '3') {
+                if (strpos($categoryKey, 'guilds_') == 0 && $page == '3') {
                     // Guild only have 2 pages.
                     break;
                 }
