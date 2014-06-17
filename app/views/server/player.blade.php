@@ -7,8 +7,7 @@
         google.setOnLoadCallback(drawChart);
         function drawChart() {
             var options = {
-                legend: { position: 'bottom' },
-                pointSize: 5
+                legend: { position: 'bottom' }
             };
 
             var data = [];
@@ -57,7 +56,7 @@
                 <thead><tr><th>Date</th><th>Guild</th><th>Name</th></tr></thead>
                 <tbody>
                     @foreach($profile as $item)
-                    <tr><td>{{ $item->updated_at->diffForHumans() }}</td><td>{{ $item->tag }}</td><td>{{ $item->name }}</td></tr>
+                    <tr><td data-toggle="tooltip" data-placement="left" title="{{ $item->updated_at }}">{{ $item->updated_at->diffForHumans() }}</td><td>{{ $item->tag }}</td><td>{{ $item->name }}</td></tr>
                     @endforeach
                 </tbody>
             </table>
