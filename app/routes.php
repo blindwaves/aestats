@@ -35,7 +35,7 @@ Route::get('job', function() {
             $pageUrl = str_replace('{category}', $categoryValue, $pageUrl);
 
             foreach($pages as $page) {
-                if (strpos($categoryKey, 'guilds_') == 0 && $page == '3') {
+                if (strpos($categoryKey, 'guilds_') === 0 && $page === '3') {
                     // Guild only have 2 pages.
                     break;
                 }
