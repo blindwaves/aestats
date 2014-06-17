@@ -41,5 +41,9 @@ Route::get('job', function() {
     }
 });
 
+// Customise our route to allow quick replacement for current Eddie.
+// http://faboo.org/eddie/andromeda/publicPlayer/playerid/874
+Route::get('eddie/{name}/publicPlayer/playerid/{id}', 'ServerController@getPlayer');
+
 Route::controller('server/{name}', 'ServerController');
 Route::controller('/', 'HomeController');
