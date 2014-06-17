@@ -28,9 +28,15 @@ class AeStatsParserService {
                 $history->rank = $content[$i]['text'];
                 $i++;
 
-                $space = strpos($content[$i]['text'], ' ');
-                $history->name = substr($content[$i]['text'], $space + 2);
-                $history->tag = substr($content[$i]['text'], 0, $space);
+                $tagIndex = strpos($content[$i]['text'], '] ');
+                if ($tagIndex === false) {
+                    $history->name = $content[$i]['text'];
+                    $history->tag = '';
+                } else {
+                    $history->name = substr($content[$i]['text'], $tagIndex + 2);
+                    $history->tag = substr($content[$i]['text'], 0, $tagIndex + 1);
+                }
+                
                 $history->url = $content[$i]['href'];
 
                 $i++;
