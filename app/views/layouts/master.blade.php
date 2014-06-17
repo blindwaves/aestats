@@ -24,11 +24,11 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                </div>            
+                </div>
                 <div class="collapse navbar-collapse" id="main-menu">
-                    <form class="navbar-form navbar-right" role="search">
+                    <form class="navbar-form navbar-right" role="search" action="{{ URL::action('ServerController@getSearch', array($serverName)) }}" method="get">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search">
+                            <input name="terms" type="text" class="form-control" placeholder="Player Name/ID" value="{{ Input::get('terms') }}">
                         </div>
                         <button type="submit" class="btn btn-default">Submit</button>
                     </form>

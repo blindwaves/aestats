@@ -13,20 +13,13 @@
 
 Route::get('job', function() {
     $genericUrl = 'http://{server}.astroempires.com/ranks.aspx?view={category}&see={page}';
-    $servers = array('andromeda');
+    $servers = App::make('supportedServers');
     $categories = array(
         'ply_level' => '', 'ply_economy' => 'ply_economy', 'ply_fleet' => 'ply_fleet', 'ply_technology' => 'ply_level', 'ply_experience' => 'ply_experience',
         'guilds_level' => 'guilds_level', 'guilds_economy' => 'guilds_economy', 'guilds_fleet' => 'guilds_fleet', 'guilds_technology' => 'guilds_technology', 'guilds_experience' => 'guilds_experience'
     );
     $pages = array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10');
     $batch = uniqid();
-
-    if (App::environment('local')) {
-        $categories = array(
-            'ply_level' => '', 'ply_economy' => 'ply_economy', 'ply_fleet' => 'ply_fleet', 'ply_technology' => 'ply_level', 'ply_experience' => 'ply_experience',
-        );
-        $pages = array('1');
-    }
 
     foreach($servers as $server) {
         foreach($categories as $categoryKey => $categoryValue) {
@@ -40,15 +33,20 @@ Route::get('job', function() {
                 $pageUrl = str_replace('{category}', $categoryValue, $pageUrl);
                 $pageUrl = str_replace('{page}', $page, $pageUrl);
                 
-                Queue::push('AeStatsParserService', array('batch' => $batch, 'category' => $categoryKey, 'server' => $server, 'url' => $pageUrl));
+
+                if (App::environment('local')) {
+                    Log::info($pageUrl);
+                } else {
+                    Queue::push('AeStatsParserService', array('batch' => $batch, 'category' => $categoryKey, 'server' => $server, 'url' => $pageUrl));
+                }
             }
         }
     }
 });
 
+Route::controller('server/{serverName}', 'ServerController');
 // Customise our route to allow quick replacement for current Eddie.
 // http://faboo.org/eddie/andromeda/publicPlayer/playerid/874
-Route::get('eddie/{name}/publicPlayer/playerid/{id}', 'ServerController@getPlayer');
+Route::get('eddie/{serverName}/publicPlayer/playerid/{id}', 'ServerController@getPlayer');
 
-Route::controller('server/{name}', 'ServerController');
 Route::controller('/', 'HomeController');

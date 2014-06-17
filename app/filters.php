@@ -13,7 +13,13 @@
 
 App::before(function($request)
 {
-	//
+	App::singleton('supportedServers', function() {
+		return array(
+			'andromeda',
+		);
+	});
+
+	View::share('serverName', '');
 });
 
 
