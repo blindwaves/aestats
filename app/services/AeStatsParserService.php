@@ -23,7 +23,7 @@ class AeStatsParserService {
             $history->category = $data['category'];
             $history->server = $data['server'];
 
-            if ($data['category'] == '' || strpos($data['category'], 'ply_') == 0) {
+            if ($data['category'] == '' || strpos($data['category'], 'ply_') === 0) {
                 // All player's rank table has 3 columns: RANK | PLAYER | LEVEL/ECONOMY/ETC...
                 $history->rank = $content[$i]['text'];
                 $i++;
@@ -37,6 +37,20 @@ class AeStatsParserService {
                 $history->value = $content[$i]['text'];
             } else {
                 // All guild's rank table has 6 columsn: RANK | GUILD | NAME | LEVEL/ECONOMY/ETC... | MEMBERS | AVG.
+                $history->rank = $content[$i]['text'];
+                $i++;
+                $history->tag = $content[$i]['text'];
+                $i++;
+                $history->name = $content[$i]['text'];
+                $history->url = $content[$i]['href'];
+                $i++;
+
+                // "|" delimiter for value|members|avg
+                $history->value = $content[$i]['text'];
+                $i++;
+                $history->value .= '|'.$content[$i]['text'];
+                $i++;
+                $history->value .= '|'.$content[$i]['text'];
             }
 
             $history->save();
