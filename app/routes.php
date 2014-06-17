@@ -29,19 +29,17 @@ Route::get('job', function() {
     }
 
     foreach($servers as $server) {
-        $pageUrl = str_replace('{server}', $server, $genericUrl);
-
         foreach($categories as $categoryKey => $categoryValue) {
-            $pageUrl = str_replace('{category}', $categoryValue, $pageUrl);
-
             foreach($pages as $page) {
                 if (strpos($categoryKey, 'guilds_') === 0 && $page === '3') {
                     // Guild only have 2 pages.
                     break;
                 }
 
+                $pageUrl = str_replace('{server}', $server, $genericUrl);
+                $pageUrl = str_replace('{category}', $categoryValue, $pageUrl);
                 $pageUrl = str_replace('{page}', $page, $pageUrl);
-
+                
                 Queue::push('AeStatsParserService', array('batch' => $batch, 'category' => $categoryKey, 'server' => $server, 'url' => $pageUrl));
             }
         }
