@@ -15,7 +15,7 @@ class CreateHistoriesTable extends Migration {
 		Schema::create('histories', function($table)
 		{
 			$table->engine = 'InnoDB';
-			
+
 			$table->increments('id');
 			$table->string('batch');    // Each parsing of the HTML will be assign the same batch number.
 			$table->string('category'); // The type of record, eg. player's level, economy, etc...
@@ -23,6 +23,7 @@ class CreateHistoriesTable extends Migration {
 			$table->string('rank');     // Server rank.
 			$table->string('server');   // Server name.
 			$table->string('tag');      // Guild tag.
+			$table->string('url');      // Guild/profile URL.
 			$table->string('value');    // The resulting value that was parsed.
 			$table->timestamps();
 		});

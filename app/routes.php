@@ -29,6 +29,11 @@ Route::get('job', function() {
             $pageUrl = str_replace('{category}', $categories[0], $pageUrl);
 
             foreach($pages as $page) {
+                if (strpos($category, 'guilds_') == 0 && $page == '3') {
+                    // Guild only have 2 pages.
+                    break;
+                }
+
                 $pageUrl = str_replace('{page}', $pages[0], $pageUrl);
 
                 Queue::push('AeStatsParserService', array('batch' => $batch, 'category' => $category, 'server' => $server, 'url' => $pageUrl));
