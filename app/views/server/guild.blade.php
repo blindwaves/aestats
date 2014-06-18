@@ -28,7 +28,7 @@
 
                 var dataView = new google.visualization.DataView(dataTable);
                 var chart = new google.visualization.LineChart(document.getElementById(item));
-                chart.draw(dataView, options);
+                //chart.draw(dataView, options);
 
                 $('#' + item).addClass('tab-pane');
             });
@@ -47,7 +47,7 @@
             </table>
         </div>
         <div class="col-md-8 col-md-pull-4">
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-tabs hide">
                 <li class="active"><a href="#fleet" data-toggle="tab">fleet</a></li>
                 <li><a href="#economy" data-toggle="tab">economy</a></li>
                 <li><a href="#level" data-toggle="tab">level</a></li>
