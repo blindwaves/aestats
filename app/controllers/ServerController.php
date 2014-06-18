@@ -64,7 +64,7 @@ class ServerController extends BaseController {
             'fleet' => $fleet,
             'level' => $level,
             'technology' => $technology,
-            'profile' => $profile,
+            'profile' => $profileHistory,
             'serverName' => $serverName,
         ));
     }
