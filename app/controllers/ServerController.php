@@ -75,8 +75,12 @@ class ServerController extends BaseController {
 
         if (! empty(Input::get('terms'))) {
             $results = History::where('server', '=', $serverName)
-                            ->where('name', 'LIKE', '%'.Input::get('terms').'%')
-                            ->orWhere('url', '=', 'profile.aspx?player='.Input::get('terms'))
+                            ->where('url', 'LIKE', 'profile.aspx?player=%')
+                            ->where(function($query)
+                            {
+                                $query->where('name', 'LIKE', '%'.Input::get('terms').'%')
+                                      ->orWhere('url', '=', 'profile.aspx?player='.Input::get('terms'));
+                            })
                             ->groupBy('name')
                             ->orderBy('id', 'DESC')
                             ->get();
