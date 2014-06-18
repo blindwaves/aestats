@@ -10,7 +10,7 @@ class History extends Eloquent {
                         ->where('url', 'LIKE', 'profile.aspx?guild=%')
                         ->first();
 
-        if ($guild->isEmpty) {
+        if ($guild == null) {
             return $this->tag;
         } else {
             $index = strrpos($guild->url, '=');
