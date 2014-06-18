@@ -2,6 +2,21 @@
 
 class History extends Eloquent {
 
+    public function getGuildLocalLink()
+    {
+        $guild = History::where('server', '=', $this->server)
+                        ->where('batch', '=', $this->batch)
+                        ->where('tag', '=', $this->tag)
+                        ->first();
+
+        if ($guild->isEmpty) {
+            return $this->tag;
+        } else {
+            $index = strrpos($guild->url, '=');
+            return '<a href="'.URL::action('ServerController@getGuild', array($this->server, substr($guild->url, $index + 1))).'">'.$this->tag.'</a>';
+        }
+    }
+
     public function getNonLocalisedValue()
     {
         return str_replace(',', '', $this->value);
