@@ -49,13 +49,15 @@ class ServerController extends BaseController {
         $profilePrevious = $profile[count($profile) - 1];
         array_push($profileHistory, $profilePrevious);
 
-        for ($i = count($profile) - 2; $i > 0; $i--) {
-            if (strcmp($profilePrevious->tag, $profile[$i]->tag) !== 0 ||
-                strcmp($profilePrevious->name, $profile[$i]->name) !== 0) {
-                    array_push($profileHistory, $profile[$i]);
-            }
+        if (count($profile) > 1) {
+            for ($i = count($profile) - 2; $i > 0; $i--) {
+                if (strcmp($profilePrevious->tag, $profile[$i]->tag) !== 0 ||
+                    strcmp($profilePrevious->name, $profile[$i]->name) !== 0) {
+                        array_push($profileHistory, $profile[$i]);
+                }
 
-            $profilePrevious = $profile[$i];
+                $profilePrevious = $profile[$i];
+            }
         }
 
         return View::make('server/player', array(
