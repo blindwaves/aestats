@@ -13,8 +13,9 @@
 
             var data = [];
             data['fleet'] = [
-                @foreach($fleet as $item) $data = explode('|', $item->getNonLocalisedValue());
-                [{{ $item->getRecordJavascriptDateString() }}, {{ $data[0] }}, {{ $data[1] }}],
+                @foreach($fleet as $item) 
+                <?php $data = explode('|', $item->getNonLocalisedValue()); ?>
+                [{{ $item->getRecordJavascriptDateString() }}, {{ $data[0] }}],
                 @endforeach
             ];
             
@@ -23,7 +24,6 @@
                 var dataTable = new google.visualization.DataTable();
                 dataTable.addColumn('date', 'date');
                 dataTable.addColumn('number', item);
-                dataTable.addColumn('number', 'avg/member');
                 dataTable.addRows(data[item]);
 
                 var dataView = new google.visualization.DataView(dataTable);
