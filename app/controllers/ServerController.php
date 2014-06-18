@@ -48,12 +48,12 @@ class ServerController extends BaseController {
         $profileHistory = array();
 
         if (count($profile) > 0) {
-            $profilePrevious = $profile[0];
+            $profilePrevious = $profile[count($profile) - 1];
             array_push($profileHistory, $profilePrevious);
         }
 
         if (count($profile) > 1) {
-            for ($i = 1; $i < count($profile); $i++) {
+            for ($i = count($profile) - 2; $i > 0; $i--) {
                 if (strcmp($profilePrevious->tag, $profile[$i]->tag) !== 0 ||
                     strcmp($profilePrevious->name, $profile[$i]->name) !== 0) {
                         array_push($profileHistory, $profile[$i]);
