@@ -7,7 +7,7 @@ class History extends Eloquent {
         $guild = History::where('server', '=', $this->server)
                         ->where('batch', '=', $this->batch)
                         ->where('tag', '=', $this->tag)
-                        ->where('url', 'LIKE', 'profile.aspx?guild=%')
+                        ->where('url', 'LIKE', 'guild.aspx?guild=%')
                         ->first();
 
         if ($guild == null) {

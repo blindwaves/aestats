@@ -5,7 +5,7 @@ class ServerController extends BaseController {
     public function getGuild($serverName, $id)
     {
         $profile = History::where('server', '=', $serverName)
-                        ->where('url', '=', 'profile.aspx?guild='.$id)
+                        ->where('url', '=', 'guild.aspx?guild='.$id)
                         ->groupBy('batch')
                         ->orderBy('id', 'DESC')
                         ->get();
