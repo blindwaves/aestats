@@ -58,7 +58,7 @@
             <table class="table table-striped">
                 <thead><tr><th>Date</th><th>Guild</th><th>Name</th></tr></thead>
                 <tbody>
-                    @for($i = count($profile) - 1; $i > 0; $i--)
+                    @for($i = count($profile) - 1; $i >= 0; $i--)
                     <tr><td data-toggle="tooltip" data-placement="left" title="{{ $profile[$i]->updated_at }}">{{ $profile[$i]->updated_at->diffForHumans() }}</td><td>{{ $profile[$i]->tag }}</td><td>{{ $profile[$i]->name }}</td></tr>
                     @endfor
                 </tbody>
