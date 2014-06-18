@@ -7,7 +7,7 @@ class ServerController extends BaseController {
         $profile = History::where('server', '=', $serverName)
                         ->where('url', '=', 'profile.aspx?player='.$id)
                         ->where('category', '=', 'ply_level')
-                        ->orderBy('id', 'DESC')
+                        ->orderBy('id', 'ASC')
                         ->get();
 
         $fleet = History::where('server', '=', $serverName)
