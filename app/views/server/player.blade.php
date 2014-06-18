@@ -58,9 +58,9 @@
             <table class="table table-striped">
                 <thead><tr><th>Date</th><th>Guild</th><th>Name</th></tr></thead>
                 <tbody>
-                    @foreach($profile as $item)
-                    <tr><td data-toggle="tooltip" data-placement="left" title="{{ $item->updated_at }}">{{ $item->updated_at->diffForHumans() }}</td><td>{{ $item->tag }}</td><td>{{ $item->name }}</td></tr>
-                    @endforeach
+                    @for($i = count($profile) - 1; $i > 0; $i--)
+                    <tr><td data-toggle="tooltip" data-placement="left" title="{{ $profile[$i]->updated_at }}">{{ $profile[$i]->updated_at->diffForHumans() }}</td><td>{{ $profile[$i]->tag }}</td><td>{{ $profile[$i]->name }}</td></tr>
+                    @endfor
                 </tbody>
             </table>
         </div>
