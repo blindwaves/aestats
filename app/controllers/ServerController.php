@@ -71,12 +71,16 @@ class ServerController extends BaseController {
 
     public function getSearch($serverName)
     {
-        $results = History::where('server', '=', $serverName)
-                        ->where('name', 'LIKE', '%'.Input::get('terms').'%')
-                        ->orWhere('url', '=', 'profile.aspx?player='.Input::get('terms'))
-                        ->groupBy('name')
-                        ->orderBy('id', 'DESC')
-                        ->get();
+        $results = array();
+
+        if (! empty(Input::get('terms'))) {
+            $results = History::where('server', '=', $serverName)
+                            ->where('name', 'LIKE', '%'.Input::get('terms').'%')
+                            ->orWhere('url', '=', 'profile.aspx?player='.Input::get('terms'))
+                            ->groupBy('name')
+                            ->orderBy('id', 'DESC')
+                            ->get();
+        }
 
         return View::make('server/search', array(
             'results' => $results,
