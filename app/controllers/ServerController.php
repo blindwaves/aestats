@@ -46,8 +46,11 @@ class ServerController extends BaseController {
                         ->get();
 
         $profileHistory = array();
-        $profilePrevious = $profile[count($profile) - 1];
-        array_push($profileHistory, $profilePrevious);
+
+        if (count($profile) > 0) {
+            $profilePrevious = $profile[count($profile) - 1];
+            array_push($profileHistory, $profilePrevious);
+        }
 
         if (count($profile) > 1) {
             for ($i = count($profile) - 2; $i > 0; $i--) {
