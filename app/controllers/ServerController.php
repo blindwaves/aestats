@@ -9,14 +9,14 @@ class ServerController extends BaseController {
                         ->groupBy('batch')
                         ->orderBy('id', 'DESC')
                         ->get();
-        /*
+        
         $fleet = History::where('server', '=', $serverName)
-                        ->where('url', '=', 'profile.aspx?player='.$id)
-                        ->where('category', '=', 'ply_fleet')
+                        ->where('url', '=', 'guild.aspx?guild='.$id)
+                        ->where('category', '=', 'guilds_fleet')
                         ->groupBy('value')
                         ->orderBy('id', 'ASC')
                         ->get();
-
+        /*
         $economy = History::where('server', '=', $serverName)
                         ->where('url', '=', 'profile.aspx?player='.$id)
                         ->where('category', '=', 'ply_economy')
@@ -65,11 +65,11 @@ class ServerController extends BaseController {
         }
 
         return View::make('server/guild', array(
-            /*'economy' => $economy,
-            'experience' => $experience,
+            //'economy' => $economy,
+            //'experience' => $experience,
             'fleet' => $fleet,
-            'level' => $level,
-            'technology' => $technology,*/
+            //'level' => $level,
+            //'technology' => $technology,
             'profile' => $profileHistory,
             'serverName' => $serverName,
         ));

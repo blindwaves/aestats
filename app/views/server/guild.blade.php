@@ -3,7 +3,36 @@
 @section('content')
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
-        
+        google.load("visualization", "1", {packages:["corechart"]});
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var options = {
+                legend: { position: 'bottom' },
+                pointSize: 5
+            };
+
+            var data = [];
+            data['fleet'] = [
+                @foreach($fleet as $item) $data = explode('|', $item->getNonLocalisedValue());
+                [{{ $item->getRecordJavascriptDateString() }}, {{ $data[0] }}, {{ $data[1] }}],
+                @endforeach
+            ];
+            
+
+            _(['fleet']).forEach(function(item) { 
+                var dataTable = new google.visualization.DataTable();
+                dataTable.addColumn('date', 'date');
+                dataTable.addColumn('number', item);
+                dataTable.addColumn('number', 'avg/member');
+                dataTable.addRows(data[item]);
+
+                var dataView = new google.visualization.DataView(dataTable);
+                var chart = new google.visualization.LineChart(document.getElementById(item));
+                chart.draw(dataView, options);
+
+                $('#' + item).addClass('tab-pane');
+            });
+        }
     </script>
 
     <div class="row">
