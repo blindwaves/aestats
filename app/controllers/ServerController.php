@@ -7,7 +7,7 @@ class ServerController extends BaseController {
         $profile = History::where('server', '=', $serverName)
                         ->where('url', '=', 'profile.aspx?player='.$id)
                         ->where('category', '=', 'ply_level')
-                        ->orderBy('id', 'ASC')
+                        ->orderBy('id', 'DESC')
                         ->get();
 
         $fleet = History::where('server', '=', $serverName)
@@ -48,12 +48,12 @@ class ServerController extends BaseController {
         $profileHistory = array();
 
         if (count($profile) > 0) {
-            $profilePrevious = $profile[count($profile) - 1];
+            $profilePrevious = $profile[0];
             array_push($profileHistory, $profilePrevious);
         }
 
         if (count($profile) > 1) {
-            for ($i = count($profile) - 2; $i > 0; $i--) {
+            for ($i = 1; $i < count($profile); $i++) {
                 if (strcmp($profilePrevious->tag, $profile[$i]->tag) !== 0 ||
                     strcmp($profilePrevious->name, $profile[$i]->name) !== 0) {
                         array_push($profileHistory, $profile[$i]);
