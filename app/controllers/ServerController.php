@@ -178,7 +178,7 @@ class ServerController extends BaseController {
                                 $query->where('name', 'LIKE', '%'.Input::get('terms').'%')
                                       ->orWhere('url', '=', 'profile.aspx?player='.Input::get('terms'));
                             })
-                            ->groupBy('name')
+                            ->groupBy('tag')
                             ->orderBy('id', 'DESC')
                             ->get();
         }
