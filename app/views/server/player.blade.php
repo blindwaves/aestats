@@ -45,6 +45,10 @@
                 dataTable.addRows(data[item]);
 
                 var dataView = new google.visualization.DataView(dataTable);
+                var dateFormatter = new google.visualization.DateFormat({ 
+                    pattern: "HH:mm" 
+                }); 
+                dateFormatter.format(dataTable, 0);
                 var chart = new google.visualization.LineChart(document.getElementById(item));
                 chart.draw(dataView, options);
 
