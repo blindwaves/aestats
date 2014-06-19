@@ -46,7 +46,7 @@
 
                 var dataView = new google.visualization.DataView(dataTable);
                 var dateFormatter = new google.visualization.DateFormat({ 
-                    pattern: "HH:mm" 
+                    pattern: "hh:mm a"
                 }); 
                 dateFormatter.format(dataTable, 0);
                 var chart = new google.visualization.LineChart(document.getElementById(item));
