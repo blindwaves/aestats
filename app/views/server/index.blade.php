@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    @foreach($content as $item)
-        {{ $item }}
-    @endforeach
+    <script type="text/javascript">
+        $('#search-form button').popover('show')
+    </script>
 @stop

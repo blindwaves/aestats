@@ -14,6 +14,10 @@
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
+        <script src="{{ URL::asset('js/lodash.compat.min.js') }}"></script>
+
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -36,12 +40,14 @@
                     </button>
                 </div>
                 <div class="collapse navbar-collapse" id="main-menu">
-                    <form class="navbar-form navbar-right" role="search" action="{{ URL::action('ServerController@getSearch', array($serverName)) }}" method="get">
+                    @if (! empty($serverName))
+                    <form id="search-form" class="navbar-form navbar-right" role="search" action="{{ URL::action('ServerController@getSearch', array($serverName)) }}" method="get">
                         <div class="form-group">
                             <input name="terms" type="text" class="form-control" placeholder="Player Name/ID" value="{{ Input::get('terms') }}">
                         </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
+                        <button type="submit" class="btn btn-default" data-toggle="popover" data-placement="bottom" data-content="Find Something">search</button>
                     </form>
+                    @endif
                 </div>
             </div>
         </div>
@@ -49,11 +55,5 @@
         <div class="container">
             @yield('content')
         </div>
-        
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
-        <script src="{{ URL::asset('js/lodash.compat.min.js') }}"></script>
     </body>
 </html>

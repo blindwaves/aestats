@@ -20,6 +20,9 @@ App::before(function($request)
 	});
 
 	View::share('serverName', '');
+	
+	$supportedServers = App::make('supportedServers');
+	View::share('supportedServers', $supportedServers);
 });
 
 

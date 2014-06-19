@@ -2,6 +2,13 @@
 
 class ServerController extends BaseController {
 
+    public function getIndex($serverName)
+    {
+        return View::make('server/index', array(
+            'serverName' => $serverName,
+        ));
+    }
+
     public function getGuild($serverName, $id)
     {
         $profile = History::where('server', '=', $serverName)
