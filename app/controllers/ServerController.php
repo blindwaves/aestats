@@ -2,6 +2,18 @@
 
 class ServerController extends BaseController {
 
+    public function __construct()
+    {
+        $this->beforeFilter(function($route) {
+            $serverName = $route->getParameter('serverName');
+            $servers = App::make('supportedServers');
+
+            if (! in_array($serverName, $servers)) {
+                return Redirect::to('/');
+            }
+        });
+    }
+
     public function getIndex($serverName)
     {
         return View::make('server/index', array(
