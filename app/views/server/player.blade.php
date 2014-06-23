@@ -8,7 +8,7 @@
         function drawChart() {
             var options = {
                 legend: { position: 'bottom' },
-                pointSize: 5
+                pointSize: 2
             };
 
             var data = [];
