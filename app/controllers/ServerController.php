@@ -107,35 +107,35 @@ class ServerController extends BaseController {
                         ->where('category', '=', 'ply_fleet')
                         ->groupBy('value')
                         ->orderBy('id', 'ASC')
-                        ->get();
+                        ->paginate(80);
 
         $economy = History::where('server', '=', $serverName)
                         ->where('url', '=', 'profile.aspx?player='.$id)
                         ->where('category', '=', 'ply_economy')
                         ->groupBy('value')
                         ->orderBy('id', 'ASC')
-                        ->get();
+                        ->paginate(80);
 
         $level = History::where('server', '=', $serverName)
                         ->where('url', '=', 'profile.aspx?player='.$id)
                         ->where('category', '=', 'ply_level')
                         ->groupBy('value')
                         ->orderBy('id', 'ASC')
-                        ->get();
+                        ->paginate(80);
 
         $experience = History::where('server', '=', $serverName)
                         ->where('url', '=', 'profile.aspx?player='.$id)
                         ->where('category', '=', 'ply_experience')
                         ->groupBy('value')
                         ->orderBy('id', 'ASC')
-                        ->get();
+                        ->paginate(80);
 
         $technology = History::where('server', '=', $serverName)
                         ->where('url', '=', 'profile.aspx?player='.$id)
                         ->where('category', '=', 'ply_technology')
                         ->groupBy('value')
                         ->orderBy('id', 'ASC')
-                        ->get();
+                        ->paginate(80);
 
         $profileHistory = array();
 
@@ -178,8 +178,8 @@ class ServerController extends BaseController {
                                 $query->where('name', 'LIKE', '%'.Input::get('terms').'%')
                                       ->orWhere('url', '=', 'profile.aspx?player='.Input::get('terms'));
                             })
-                            ->groupBy('tag')
                             ->orderBy('id', 'DESC')
+                            ->groupBy('url')
                             ->get();
         }
 
