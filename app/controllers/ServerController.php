@@ -106,35 +106,35 @@ class ServerController extends BaseController {
                         ->where('url', '=', 'profile.aspx?player='.$id)
                         ->where('category', '=', 'ply_fleet')
                         ->groupBy('value')
-                        ->orderBy('id', 'ASC')
+                        ->orderBy('id', 'DESC')
                         ->paginate(80);
 
         $economy = History::where('server', '=', $serverName)
                         ->where('url', '=', 'profile.aspx?player='.$id)
                         ->where('category', '=', 'ply_economy')
                         ->groupBy('value')
-                        ->orderBy('id', 'ASC')
+                        ->orderBy('id', 'DESC')
                         ->paginate(80);
 
         $level = History::where('server', '=', $serverName)
                         ->where('url', '=', 'profile.aspx?player='.$id)
                         ->where('category', '=', 'ply_level')
                         ->groupBy('value')
-                        ->orderBy('id', 'ASC')
+                        ->orderBy('id', 'DESC')
                         ->paginate(80);
 
         $experience = History::where('server', '=', $serverName)
                         ->where('url', '=', 'profile.aspx?player='.$id)
                         ->where('category', '=', 'ply_experience')
                         ->groupBy('value')
-                        ->orderBy('id', 'ASC')
+                        ->orderBy('id', 'DESC')
                         ->paginate(80);
 
         $technology = History::where('server', '=', $serverName)
                         ->where('url', '=', 'profile.aspx?player='.$id)
                         ->where('category', '=', 'ply_technology')
                         ->groupBy('value')
-                        ->orderBy('id', 'ASC')
+                        ->orderBy('id', 'DESC')
                         ->paginate(80);
 
         $profileHistory = array();
