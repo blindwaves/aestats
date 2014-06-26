@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class HistoriesAddIndexName extends Migration {
+class HistoriesIndexNameFulltext extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,9 +12,7 @@ class HistoriesAddIndexName extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('histories', function($t) {
-			$t->index('name');
-		});
+		DB::statement('ALTER TABLE histories ADD FULLTEXT search(name)');
 	}
 
 	/**
@@ -25,7 +23,7 @@ class HistoriesAddIndexName extends Migration {
 	public function down()
 	{
 		Schema::table('histories', function($t) {
-			$t->dropIndex('histories_name_index');
+			$t->dropIndex('search');
 		});
 	}
 

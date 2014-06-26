@@ -174,14 +174,15 @@ class ServerController extends BaseController {
         
         if (! empty($terms)) {
             $results = History::where('server', '=', $serverName)
-                            ->where('url', 'LIKE', 'profile.aspx?player=%')
-                            ->where(function($query)
+                            ->where(function($query) use(&$terms)
                             {
-                                $query->where('name', 'LIKE', '%'.Input::get('terms').'%')
-                                      ->orWhere('url', '=', 'profile.aspx?player='.Input::get('terms'));
+                                // http://creative-punch.net/2013/12/implementing-laravel-4-full-text-search/
+                                $query->whereRaw('MATCH (name) AGAINST (? IN BOOLEAN MODE)',
+                                        array('+'.$terms.'*'))
+                                      ->orWhere('url', '=', 'profile.aspx?player='.$terms);
                             })
-                            ->orderBy('id', 'DESC')
                             ->groupBy('url')
+                            ->orderBy('id', 'DESC')
                             ->get();
         }
 
