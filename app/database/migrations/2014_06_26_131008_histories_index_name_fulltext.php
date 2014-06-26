@@ -12,6 +12,7 @@ class HistoriesIndexNameFulltext extends Migration {
 	 */
 	public function up()
 	{
+		DB::statement('ALTER TABLE histories ENGINE = MyISAM;');
 		DB::statement('ALTER TABLE histories ADD FULLTEXT search(name)');
 	}
 
