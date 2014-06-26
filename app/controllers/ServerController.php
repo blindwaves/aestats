@@ -169,8 +169,10 @@ class ServerController extends BaseController {
     public function getSearch($serverName)
     {
         $results = array();
-
-        if (! empty(Input::get('terms'))) {
+        
+        $terms = Input::get('terms');
+        
+        if (! empty($terms)) {
             $results = History::where('server', '=', $serverName)
                             ->where('url', 'LIKE', 'profile.aspx?player=%')
                             ->where(function($query)
