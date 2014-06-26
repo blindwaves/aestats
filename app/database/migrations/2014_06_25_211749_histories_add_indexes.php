@@ -26,8 +26,8 @@ class HistoriesAddIndexes extends Migration {
 	public function down()
 	{
 		Schema::table('histories', function($t) {
-			$t->dropIndex('category');
-			$t->dropIndex('url');
+			$t->dropIndex('histories_category_index');
+			$t->dropIndex('histories_url_index');
 		});
 	}
 

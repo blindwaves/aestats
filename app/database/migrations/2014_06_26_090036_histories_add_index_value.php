@@ -25,7 +25,7 @@ class HistoriesAddIndexValue extends Migration {
 	public function down()
 	{
 		Schema::table('histories', function($t) {
-			$t->dropIndex('value');
+			$t->dropIndex('histories_value_index');
 		});
 	}
 
