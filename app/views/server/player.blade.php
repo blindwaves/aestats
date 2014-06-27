@@ -37,11 +37,11 @@
             ?>
             
             var data = [];
-            data['fleet'] = [<?php echo implode($tempData['fleet']); ?>];
-            data['economy'] = [<?php echo implode($tempData['economy']); ?>];
-            data['level'] = [<?php echo implode($tempData['level']); ?>];
-            data['experience'] = [<?php echo implode($tempData['experience']); ?>];
-            data['technology'] = [<?php echo implode($tempData['technology']); ?>];
+            data['fleet'] = [<?php echo implode($tempData['fleet'], ','); ?>];
+            data['economy'] = [<?php echo implode($tempData['economy'], ','); ?>];
+            data['level'] = [<?php echo implode($tempData['level'], ','); ?>];
+            data['experience'] = [<?php echo implode($tempData['experience'], ','); ?>];
+            data['technology'] = [<?php echo implode($tempData['technology'], ','); ?>];
 
             _(['fleet', 'economy', 'level', 'experience', 'technology']).forEach(function(item) { 
                 var dataTable = new google.visualization.DataTable();
