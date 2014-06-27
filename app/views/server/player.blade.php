@@ -82,11 +82,11 @@
                 <li><a href="#technology" data-toggle="tab">technology</a></li>
             </ul>
             <div class="tab-content">
-                <div class="active" id="fleet"></div>
-                <div class="" id="economy"></div>
-                <div class="" id="level"></div>
-                <div class="" id="experience"></div>
-                <div class="" id="technology"></div>
+                <div class="active" style="height: 300px;" id="fleet"></div>
+                <div class="" style="height: 300px;" id="economy"></div>
+                <div class="" style="height: 300px;" id="level"></div>
+                <div class="" style="height: 300px;" id="experience"></div>
+                <div class="" style="height: 300px;" id="technology"></div>
             </div>
         </div>
     </div>
