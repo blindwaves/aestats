@@ -34,7 +34,7 @@ class ServerController extends BaseController {
                         ->where('category', '=', 'guilds_fleet')
                         ->groupBy('value')
                         ->orderBy('id', 'ASC')
-                        ->get();
+                        ->paginate(80);
         /*
         $economy = History::where('server', '=', $serverName)
                         ->where('url', '=', 'profile.aspx?player='.$id)
@@ -73,7 +73,7 @@ class ServerController extends BaseController {
         }
 
         if (count($profile) > 1) {
-            for ($i = count($profile) - 2; $i > 0; $i--) {
+            for ($i = count($profile) - 2; $i >= 0; $i--) {
                 if (strcmp($profilePrevious->tag, $profile[$i]->tag) !== 0 ||
                     strcmp($profilePrevious->name, $profile[$i]->name) !== 0) {
                         array_push($profileHistory, $profile[$i]);
