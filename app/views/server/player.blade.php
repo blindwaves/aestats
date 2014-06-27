@@ -10,33 +10,38 @@
                 legend: { position: 'bottom' },
                 pointSize: 2
             };
-
+            
+            <?php
+            $tempData = array();
+            
+            $tempData['fleet'] = array();
+            foreach($fleet as $item) {
+                array_push($tempData['fleet'], '['.$item->getRecordJavascriptDateString().','.$item->getNonLocalisedValue().']');
+            }
+            $tempData['economy'] = array();
+            foreach($economy as $item) {
+                array_push($tempData['economy'], '['.$item->getRecordJavascriptDateString().','.$item->getNonLocalisedValue().']');
+            }
+            $tempData['level'] = array();
+            foreach($level as $item) {
+                array_push($tempData['level'], '['.$item->getRecordJavascriptDateString().','.$item->getNonLocalisedValue().']');
+            }
+            $tempData['experience'] = array();
+            foreach($experience as $item) {
+                array_push($tempData['experience'], ''.$item->getRecordJavascriptDateString().','.$item->getNonLocalisedValue().']');
+            }
+            $tempData['technology'] = array();
+            foreach($technology as $item) {
+                array_push($tempData['technology'], '['.$item->getRecordJavascriptDateString().','.$item->getNonLocalisedValue().']');
+            }
+            ?>
+            
             var data = [];
-            data['fleet'] = [
-                @foreach($fleet as $item)
-                [{{ $item->getRecordJavascriptDateString() }}, {{ $item->getNonLocalisedValue() }}],
-                @endforeach
-            ];
-            data['economy'] = [
-                @foreach($economy as $item)
-                [{{ $item->getRecordJavascriptDateString() }}, {{ $item->getNonLocalisedValue() }}],
-                @endforeach
-            ];
-            data['level'] = [
-                @foreach($level as $item)
-                [{{ $item->getRecordJavascriptDateString() }}, {{ $item->getNonLocalisedValue() }}],
-                @endforeach
-            ];
-            data['experience'] = [
-                @foreach($experience as $item)
-                [{{ $item->getRecordJavascriptDateString() }}, {{ $item->getNonLocalisedValue() }}],
-                @endforeach
-            ];
-            data['technology'] = [
-                @foreach($technology as $item)
-                [{{ $item->getRecordJavascriptDateString() }}, {{ $item->getNonLocalisedValue() }}],
-                @endforeach
-            ];
+            data['fleet'] = [<?php echo implode($tempData['fleet']); ?>];
+            data['economy'] = [<?php echo implode($tempData['economy']); ?>];
+            data['level'] = [<?php echo implode($tempData['level']); ?>];
+            data['experience'] = [<?php echo implode($tempData['experience']); ?>];
+            data['technology'] = [<?php echo implode($tempData['technology']); ?>];
 
             _(['fleet', 'economy', 'level', 'experience', 'technology']).forEach(function(item) { 
                 var dataTable = new google.visualization.DataTable();
