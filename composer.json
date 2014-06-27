@@ -6,7 +6,7 @@
 	"require": {
 		"laravel/framework": "4.2.*",
 		"fabpot/goutte": "~2.0",
-		"pda/pheanstalk": "dev-master"
+		"pda/pheanstalk": "~2.0"
 	},
 	"autoload": {
 		"classmap": [
