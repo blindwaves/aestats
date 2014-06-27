@@ -28,7 +28,7 @@
             }
             $tempData['experience'] = array();
             foreach($experience as $item) {
-                array_push($tempData['experience'], ''.$item->getRecordJavascriptDateString().','.$item->getNonLocalisedValue().']');
+                array_push($tempData['experience'], '['.$item->getRecordJavascriptDateString().','.$item->getNonLocalisedValue().']');
             }
             $tempData['technology'] = array();
             foreach($technology as $item) {
