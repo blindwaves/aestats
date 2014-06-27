@@ -1,40 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-        google.load("visualization", "1", {packages:["corechart"]});
-        google.setOnLoadCallback(drawChart);
-        function drawChart() {
-            var options = {
-                legend: { position: 'bottom' },
-                pointSize: 5
-            };
-
-            var data = [];
-            data['fleet'] = [
-                @foreach($fleet as $item) 
-                <?php $data = explode('|', $item->getNonLocalisedValue()); ?>
-                [{{ $item->getRecordJavascriptDateString() }}, {{ $data[0] }}],
-                @endforeach
-            ];
-            
-
-            _(['fleet']).forEach(function(item) { 
-                var dataTable = new google.visualization.DataTable();
-                dataTable.addColumn('date', 'date');
-                dataTable.addColumn('number', item);
-                dataTable.addRows(data[item]);
-
-                var dataView = new google.visualization.DataView(dataTable);
-                var chart = new google.visualization.LineChart(document.getElementById(item));
-                //chart.draw(dataView, options);
-
-                $('#' + item).addClass('tab-pane');
-            });
-        }
-    </script>
-
     <div class="row">
         <div class="col-md-4 col-md-push-8" style="margin-top: 4px;">
             <table class="table table-striped">
