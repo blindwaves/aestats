@@ -1,25 +1,41 @@
-## Laravel PHP Framework
+Minimum Requirements
+====================
+* PHP 5.5.0
+* Composer (https://getcomposer.org/)
+* Beanstalkd (http://kr.github.io/beanstalkd/)
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/downloads.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+Build Steps
+===========
+1. Run the following commands:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, and caching.
+    > $ composer install
 
-Laravel aims to make the development process a pleasing one for the developer without sacrificing application functionality. Happy developers make the best code. To this end, we've attempted to combine the very best of what we have seen in other web frameworks, including frameworks implemented in other languages, such as Ruby on Rails, ASP.NET MVC, and Sinatra.
+2. Open the following file and ensure that your machine name contains those strings:
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+    > www/laravel/bootstrap/start.php:29
 
-## Official Documentation
+3. Create folder:
 
-Documentation for the entire framework can be found on the [Laravel website](http://laravel.com/docs).
+    > laravel/app/config/local/
 
-### Contributing To Laravel
+4. Copy whatever configuration files needed to the folder in step 2 and modify as needed. For example:
 
-**All issues and pull requests should be filed on the [laravel/framework](http://github.com/laravel/framework) repository.**
+    > laravel/app/config/database.php
 
-### License
+5. Open and modify the path as needed for the following file:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+    > www/laravel/public/.htaccess:9
+
+6. Run the following commands:
+
+    > $ php artisan migrate --env=local  
+
+7. Open browser and navigate to application public directory:
+
+    > http://domain/laravel/www/public/
+
+8. Schedular/Cron hourly access (starts the scraper):
+
+    > http://domain/laravel/www/public/job
+
+9. Done.
